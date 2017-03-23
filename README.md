@@ -1,4 +1,4 @@
-###Instructions
+### Instructions
 
 The project consists of two parts:
 
@@ -15,7 +15,9 @@ Review criteria
 - Did the student perform some relevant confidence intervals and/or tests?
 - Were the results of the tests and/or intervals interpreted in the context of the problem correctly?
 - Did the student describe the assumptions needed for their conclusions?
-####Part 1: Simulation Exercise Instructionsless 
+
+#### Part 1: Simulation Exercise Instructionsless 
+
 In this project you will investigate the exponential distribution in R and compare it with the Central Limit Theorem. The exponential distribution can be simulated in R with rexp(n, lambda) where lambda is the rate parameter. The mean of exponential distribution is 1/lambda and the standard deviation is also 1/lambda. Set lambda = 0.2 for all of the simulations. You will investigate the distribution of averages of 40 exponentials. Note that you will need to do a thousand simulations.
 
 Illustrate via simulation and associated explanatory text the properties of the distribution of the mean of 40 exponentials. You should
@@ -42,7 +44,7 @@ This exercise is asking you to use your knowledge of the theory given in class t
 
 Confused? Try re-watching video lecture 07 for a starter on how to complete this project.
 
-####Sample Project Report Structure
+##### Sample Project Report Structure
 
 Of course, there are multiple ways one could structure a report to address the requirements above. However, the more clearly you pose and answer each question, the easier it will be for reviewers to clearly identify and evaluate your work.
 
@@ -54,7 +56,8 @@ A sample set of headings that could be used to guide the creation of your report
 - Sample Mean versus Theoretical Mean: Include figures with titles. In the figures, highlight the means you are comparing. Include text that explains the figures and what is shown on them, and provides appropriate numbers.
 - Sample Variance versus Theoretical Variance: Include figures (output from R) with titles. Highlight the variances you are comparing. Include text that explains your understanding of the differences of the variances.
 - Distribution: Via figures and text, explain how one can tell the distribution is approximately normal.
-####Part 2: Basic Inferential Data Analysis Instructionsless 
+
+#### Part 2: Basic Inferential Data Analysis Instructionsless 
 Now in the second portion of the project, we're going to analyze the ToothGrowth data in the R datasets package.
 
 1. Load the ToothGrowth data and perform some basic exploratory data analyses
