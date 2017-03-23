@@ -1,0 +1,7 @@
+---
+title: "Statistical Inference Course Project"
+author: "gspinnadauhu"
+date: "March 23, 2017"
+output: pdf_document
+---
+
