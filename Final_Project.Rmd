@@ -5,3 +5,17 @@ date: "March 23, 2017"
 output: pdf_document
 ---
 
+#### Part 1: Simulation Exercise
+##### Overview
+##### Simulations
+##### Sample Mean vs Theoretical Mean
+##### Sample Variance vs Theoretical Variance
+##### Distribution
+
+
+
+#### Part 2: Basic Inferential Data Analysis
+1. Loading Data & Basic Analysis
+2. Data Summary
+3. Comparing Tooth Growth by supp & dose
+4. Assumptions & Conclusions
