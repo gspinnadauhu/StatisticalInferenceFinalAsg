@@ -6,11 +6,19 @@ output: pdf_document
 ---
 
 #### Part 1: Simulation Exercise
-##### Overview
-##### Simulations
-##### Sample Mean vs Theoretical Mean
-##### Sample Variance vs Theoretical Variance
-##### Distribution
+1. Overview
+In this project we are investigating the exponential distribution in R and compare it with the Central Limit Theorem. We are investigating distribution of averages for 40 expenonentials.
+2. Simulations
+Taking 1000 averages of 40 random exponentials with lambda=0.2. Putting averages in mns.
+```{r}
+mns<-NULL
+for (i in 1:1000) {
+        mns=c(mns,mean(rexp(40,0.2)))
+}
+```
+3. Sample Mean vs Theoretical Mean
+4. Sample Variance vs Theoretical Variance
+5. Distribution
 
 
 
