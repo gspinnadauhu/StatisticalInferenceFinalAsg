@@ -9,18 +9,38 @@ output: pdf_document
 1. Overview
 In this project we are investigating the exponential distribution in R and compare it with the Central Limit Theorem. We are investigating distribution of averages for 40 expenonentials.
 2. Simulations
-Taking 1000 averages of 40 random exponentials with lambda=0.2. Putting averages in mns.
+Taking 1000 averages of 40 random exponentials with lambda=0.2. Putting averages in dataframe mns.
 ```{r}
 mns<-NULL
 for (i in 1:1000) {
         mns=c(mns,mean(rexp(40,0.2)))
 }
+mns<-data.frame(mns)
 ```
 3. Sample Mean vs Theoretical Mean
+The theoretical mean of an exponential distribution is 1/lambda (lambda=0.2 in this case).
+Comparing the theoretical mean with the mean of sampled means.
+```{r}
+library(ggplot2)
+ggplot(data=mns, aes(mns))+
+        geom_histogram()+
+        labs(title="Theoretical Mean vs Sample Mean",
+             x="Sample Means",
+             y="Count")+
+        geom_vline(xintercept=1/0.2, colour="green",linetype="longdash", size=1)+
+        geom_text(aes(x=5.5,y=10,label="Theoretical Mean"),color="green")+
+        theme_classic()
+```
 4. Sample Variance vs Theoretical Variance
+The theoretical variance of an exponential distribution is (1/lambda)^2. Comparing the theoretical variance with the variance of the sample means.
+```{r}
+
+```
 5. Distribution
+Comparing 1000 draws from an exponential distrion with lambda=0.2 with the distribution of the sampled means in mns.
+```{r}
 
-
+```
 
 #### Part 2: Basic Inferential Data Analysis
 1. Loading Data & Basic Analysis
