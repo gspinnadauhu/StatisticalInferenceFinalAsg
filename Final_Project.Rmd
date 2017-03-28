@@ -11,25 +11,27 @@ In this project we are investigating the exponential distribution in R and compa
 2. Simulations
 Taking 1000 averages and variances of 40 random exponential distributions with lambda=0.2. Putting samples in dataframe sims.
 ```{r}
+lambda<-0.2
 mns<-NULL
 vars<-NULL
 for (i in 1:1000) {
-        mns=c(mns,mean(rexp(40,0.2)))
-        vars=c(vars,var(rexp(40,0.2)))
+        mns=c(mns,mean(rexp(40,lambda)))
+        vars=c(vars,var(rexp(40,lambda)))
 }
-sims<-data.frame(mns,vars)
+sims<-data.frame(mns)
 ```
 3. Sample Mean vs Theoretical Mean
 The theoretical mean of an exponential distribution is 1/lambda (lambda=0.2 in this case).
 Comparing the theoretical mean with the mean of sampled means.
 ```{r}
-ggplot2::ggplot(data=sims, aes(mns))+
+library(ggplot2)
+ggplot(data=sims, aes(mns))+
         geom_histogram()+
         labs(title="Theoretical Mean vs Sample Mean",
              x="Sample Means",
              y="Count")+
-        geom_vline(xintercept=1/0.2, colour="green",linetype="longdash", size=1)+
-        geom_text(aes(x=5.5,y=10,label="Theoretical Mean"),color="green")+
+        geom_vline(xintercept=1/lambda, colour="green",linetype="longdash", size=1)+
+        geom_text(aes(x=1/lambda*1.15,y=10,label="Theoretical Mean"),color="green")+
         theme_classic()
 ```
 As visible above, the sample means appear to center around the distribution's theoretical mean.
@@ -40,10 +42,25 @@ mean(sims$mns)
 4. Sample Variance vs Theoretical Variance
 The theoretical variance of an exponential distribution is (1/lambda)^2. Comparing the theoretical variance with the variance of the sample means.
 ```{r}
-
+library(ggplot2)
+ggplot(data=sims, aes(vars))+
+        geom_histogram()+
+        labs(title="Theoretical Variance vs Sample Variance",
+             x="Sample Variances",
+             y="Count")+
+        geom_vline(xintercept=(1/lambda)^2, colour="blue",linetype="longdash", size=1)+
+        geom_text(aes(x=(1/lambda)^2*1.6,y=10,label="Theoretical Variance"),color="blue")+
+        theme_classic()
 ```
+As visible above, the sample variances appear are for the most part located around the theoretical variance.
+Furthermore, the mean of the sample variances is very close to (1/lambda)^2=(1/0.2)^2=25
+```{r}
+mean(sims$vars)
+```
+
+
 5. Distribution
-Comparing 1000 draws from an exponential distrion with lambda=0.2 with the distribution of the sampled means in mns.
+Comparing 1000 draws from an exponential distribution with lambda=0.2 with the distribution of the sampled means in mns.
 ```{r}
 
 ```
