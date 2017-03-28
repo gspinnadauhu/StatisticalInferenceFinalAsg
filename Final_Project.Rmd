@@ -90,10 +90,20 @@ ggplot(data=sims, aes(mns))+
         geom_text(aes(x=mean(sims$mns)+.25,y=10,label="Mean"),color="green")+
         theme_classic()
 ```
-While both have a mean of 5, which matches the theoretical mean, the draws are normally distributed only in the set of 1000 means drawn for samples size 40.
+While both have a mean of 5, which matches the theoretical mean, the draws are normally distributed only in the set of 1000 means drawn for samples size 40. As the sample size increases, the sampled means conform closer to the theoretical mean, which is why the distribution looks more bell curved.
 
 #### Part 2: Basic Inferential Data Analysis
 1. Loading Data & Basic Analysis
+First, loading the ToothGrowth data set and looking at the structure of the dataframe.
+```{r}
+library(datasets)
+data("ToothGrowth")
+```
+Then, looking at structure and summary statistics of the dataframe.
+```{r}
+str(ToothGrowth)
+summary(ToothGrowth)
+```
 2. Data Summary
 3. Comparing Tooth Growth by supp & dose
 4. Assumptions & Conclusions
