@@ -60,10 +60,37 @@ mean(sims$vars)
 
 
 5. Distribution
-Comparing 1000 draws from an exponential distribution with lambda=0.2 with the distribution of the sampled means in mns.
+Comparing 1000 draws from an exponential distribution with lambda=0.2 with the distribution of the 1000 sampled means of 40 exponentials in mns.
+First, simulating the 1000 draws, converting to a data frame & plotting the distribution.
 ```{r}
-
+draws<-rexp(1000,0.2)
+draws<-data.frame(draws)
+drawmean<-mean(draws$draws)
+library(ggplot2)
+ggplot(data=draws, aes(draws))+
+        geom_histogram()+
+        labs(title="1000 Random Draws from Exponential Distribution",
+             x="Samples",
+             y="Count")+
+        geom_vline(xintercept=mean(drawmean), colour="lightblue",linetype="longdash", size=1)+
+        geom_text(aes(x=drawmean+1.5,y=10,label="Mean"),color="lightblue")+
+        theme_classic()
 ```
+These random draws conform to the expected shape of an exponential distribution.
+
+Now, comparing this to the distrbution of means drawn from 1000 simulated sets of 40 exponential distributions in sims$mns.
+```{r}
+library(ggplot2)
+ggplot(data=sims, aes(mns))+
+        geom_histogram()+
+        labs(title="Theoretical Mean vs Sample Mean",
+             x="Sample Means",
+             y="Count")+
+        geom_vline(xintercept=1/lambda, colour="green",linetype="longdash", size=1)+
+        geom_text(aes(x=mean(sims$mns)+.25,y=10,label="Mean"),color="green")+
+        theme_classic()
+```
+While both have a mean of 5, which matches the theoretical mean, the draws are normally distributed only in the set of 1000 means drawn for samples size 40.
 
 #### Part 2: Basic Inferential Data Analysis
 1. Loading Data & Basic Analysis
