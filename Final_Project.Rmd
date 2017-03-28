@@ -9,20 +9,21 @@ output: pdf_document
 1. Overview
 In this project we are investigating the exponential distribution in R and compare it with the Central Limit Theorem. We are investigating distribution of averages for 40 expenonentials.
 2. Simulations
-Taking 1000 averages of 40 random exponentials with lambda=0.2. Putting averages in dataframe mns.
+Taking 1000 averages and variances of 40 random exponential distributions with lambda=0.2. Putting samples in dataframe sims.
 ```{r}
 mns<-NULL
+vars<-NULL
 for (i in 1:1000) {
         mns=c(mns,mean(rexp(40,0.2)))
+        vars=c(vars,var(rexp(40,0.2)))
 }
-mns<-data.frame(mns)
+sims<-data.frame(mns,vars)
 ```
 3. Sample Mean vs Theoretical Mean
 The theoretical mean of an exponential distribution is 1/lambda (lambda=0.2 in this case).
 Comparing the theoretical mean with the mean of sampled means.
 ```{r}
-library(ggplot2)
-ggplot(data=mns, aes(mns))+
+ggplot2::ggplot(data=sims, aes(mns))+
         geom_histogram()+
         labs(title="Theoretical Mean vs Sample Mean",
              x="Sample Means",
@@ -30,6 +31,11 @@ ggplot(data=mns, aes(mns))+
         geom_vline(xintercept=1/0.2, colour="green",linetype="longdash", size=1)+
         geom_text(aes(x=5.5,y=10,label="Theoretical Mean"),color="green")+
         theme_classic()
+```
+As visible above, the sample means appear to center around the distribution's theoretical mean.
+Furthermore, the mean of the sample means is almost exactly equal to 1/lambda=1/0.2=5
+```{r}
+mean(sims$mns)
 ```
 4. Sample Variance vs Theoretical Variance
 The theoretical variance of an exponential distribution is (1/lambda)^2. Comparing the theoretical variance with the variance of the sample means.
