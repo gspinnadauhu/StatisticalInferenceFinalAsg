@@ -98,12 +98,32 @@ First, loading the ToothGrowth data set and looking at the structure of the data
 ```{r}
 library(datasets)
 data("ToothGrowth")
-```
-Then, looking at structure and summary statistics of the dataframe.
-```{r}
 str(ToothGrowth)
-summary(ToothGrowth)
 ```
 2. Data Summary
+First, looking at summary statistics.
+```{r}
+summary(ToothGrowth)
+```
+Then, looking at overall distribution of tooth growth (len), overlaying a normal distribution.
+```{r}
+library(ggplot2)
+ggplot(data=ToothGrowth,aes(x=len))+
+        geom_histogram(aes(y=..density..,fill=..count..),
+                       binwidth=1,
+                       color="black")+
+        scale_fill_gradient("Count",
+                            low="#DCDCDC",
+                            high="#7C7C7C")+
+        labs(title="Actual Distribution Growth vs Normal Distribution",
+             x="Growth",
+             y="Density")+
+        geom_line(aes(y=dnorm(x=ToothGrowth$len,mean=mean(ToothGrowth$len),sd=sd(ToothGrowth$len))),
+                  color="magenta",
+                  size=1.5)+
+        theme_classic()
+```
+It appears that the toothgrowth sample is not really normally distributed. While there appear to be fewer observations on the low/high end, there seem to be some clustering of observations around 10, 14 and 26.
 3. Comparing Tooth Growth by supp & dose
+
 4. Assumptions & Conclusions
