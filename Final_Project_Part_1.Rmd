@@ -81,12 +81,15 @@ output: pdf_document
     ```{r}
     library(ggplot2)
     ggplot(data=sims, aes(mns))+
-            geom_histogram()+
+            geom_histogram(aes(y=..density..))+
             labs(title="Distribution and Mean of 1000 Sampled Means",
                  x="Sample Means",
                  y="Count")+
             geom_vline(xintercept=1/lambda, colour="green",linetype="longdash", size=1)+
-            geom_text(aes(x=mean(sims$mns)+.25,y=10,label="Mean"),color="green")+
+            geom_text(aes(x=mean(sims$mns)+.25,y=0.1,label="Mean"),color="green")+
+            geom_line(aes(y=dnorm(x=sims$mns,mean=mean(sims$mns),sd=sd(sims$mns))),
+                      color="black",
+                      size=1)+
             theme_classic()
     ```
     While both have a mean of 5, which matches the theoretical mean, the draws are normally distributed only in the set of 1000 means drawn for samples size 40. As the sample size increases, the sampled means conform closer to the theoretical mean, which is why the distribution looks more bell curved.
