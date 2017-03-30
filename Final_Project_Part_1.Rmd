@@ -1,0 +1,92 @@
+---
+title: "Statistical Inference Course Project: Part 1"
+author: "gspinnadauhu"
+date: "March 23, 2017"
+output: pdf_document
+---
+
+#### Part 1: Simulation Exercise
+1. Overview
+    In this project we are investigating the exponential distribution in R and compare it with the Central Limit Theorem. We are investigating distribution of averages for 40 expenonentials.
+2. Simulations
+    Taking 1000 averages and variances of 40 random exponential distributions with lambda=0.2. Putting samples in dataframe sims.
+    ```{r}
+    lambda<-0.2
+    mns<-NULL
+    vars<-NULL
+    for (i in 1:1000) {
+            mns=c(mns,mean(rexp(40,lambda)))
+            vars=c(vars,var(rexp(40,lambda)))
+    }
+    sims<-data.frame(mns,vars)
+    ```
+3. Sample Mean vs Theoretical Mean
+    The theoretical mean of an exponential distribution is 1/lambda (lambda=0.2 in this case).
+    Comparing the theoretical mean with the mean of sampled means.
+    ```{r}
+    library(ggplot2)
+    ggplot(data=sims, aes(mns))+
+            geom_histogram()+
+            labs(title="Theoretical Mean vs Sample Mean",
+                 x="Sample Means",
+                 y="Count")+
+            geom_vline(xintercept=1/lambda, colour="green",linetype="longdash", size=1)+
+            geom_text(aes(x=1/lambda*1.15,y=10,label="Theoretical Mean"),color="green")+
+            theme_classic()
+    ```
+    As visible above, the sample means appear to center around the distribution's theoretical mean.
+    Furthermore, the mean of the sample means is almost exactly equal to 1/lambda=1/0.2=5
+    ```{r}
+    mean(sims$mns)
+    ```
+4. Sample Variance vs Theoretical Variance
+    The theoretical variance of an exponential distribution is (1/lambda)^2. Comparing the theoretical variance with the variance of the sample means.
+    ```{r}
+    library(ggplot2)
+    ggplot(data=sims, aes(vars))+
+            geom_histogram()+
+            labs(title="Theoretical Variance vs Sample Variance",
+                 x="Sample Variances",
+                 y="Count")+
+            geom_vline(xintercept=(1/lambda)^2, colour="blue",linetype="longdash", size=1)+
+            geom_text(aes(x=(1/lambda)^2*1.6,y=10,label="Theoretical Variance"),color="blue")+
+            theme_classic()
+    ```
+    As visible above, the sample variances appear are for the most part located around the theoretical variance.
+    Furthermore, the mean of the sample variances is very close to (1/lambda)^2=(1/0.2)^2=25
+    ```{r}
+    mean(sims$vars)
+    ```
+
+
+5. Distribution
+    Comparing 1000 draws from an exponential distribution with lambda=0.2 with the distribution of the 1000 sampled means of 40 exponentials in mns.
+    First, simulating the 1000 draws, converting to a data frame & plotting the distribution.
+    ```{r}
+    draws<-rexp(1000,0.2)
+    draws<-data.frame(draws)
+    drawmean<-mean(draws$draws)
+    library(ggplot2)
+    ggplot(data=draws, aes(draws))+
+            geom_histogram()+
+            labs(title="1000 Random Draws from Exponential Distribution",
+                 x="Samples",
+                 y="Count")+
+            geom_vline(xintercept=mean(drawmean), colour="lightblue",linetype="longdash", size=1)+
+            geom_text(aes(x=drawmean+1.5,y=10,label="Mean"),color="lightblue")+
+            theme_classic()
+    ```
+    These random draws conform to the expected shape of an exponential distribution.
+    Now, comparing this to the distrbution of means drawn from 1000 simulated sets of 40 exponential distributions in sims$mns.
+    ```{r}
+    library(ggplot2)
+    ggplot(data=sims, aes(mns))+
+            geom_histogram()+
+            labs(title="Distribution and Mean of 1000 Sampled Means",
+                 x="Sample Means",
+                 y="Count")+
+            geom_vline(xintercept=1/lambda, colour="green",linetype="longdash", size=1)+
+            geom_text(aes(x=mean(sims$mns)+.25,y=10,label="Mean"),color="green")+
+            theme_classic()
+    ```
+    While both have a mean of 5, which matches the theoretical mean, the draws are normally distributed only in the set of 1000 means drawn for samples size 40. As the sample size increases, the sampled means conform closer to the theoretical mean, which is why the distribution looks more bell curved.
