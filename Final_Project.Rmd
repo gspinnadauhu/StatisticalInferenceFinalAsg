@@ -94,9 +94,12 @@ output: pdf_document
 #### Part 2: Basic Inferential Data Analysis
 This analysis is using the R ToothGrowth dataset which was created from assessing the effect of vitamin C on tooth growth in guinea pigs.
 The dataset contains 60 observations with following variables:
-    len         tooth length
-    supp        supplement type (VC-ascorbic acid, OJ-orange juice)
-    dose        dose in miligrams per day
+- len
+    tooth length
+- supp
+    supplement type (VC-ascorbic acid, OJ-orange juice)
+- dose
+    dose in miligrams per day
     
 1. Loading Data & Basic Analysis
     First, loading the ToothGrowth data set and looking at the structure of the dataframe.
